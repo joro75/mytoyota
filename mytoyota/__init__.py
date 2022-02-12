@@ -7,4 +7,7 @@ except ModuleNotFoundError:
     # 3.7
     import importlib_metadata
 
-__version__ = importlib_metadata.version(__name__)
+try:
+    __version__ = importlib_metadata.version(__name__)
+except importlib_metadata.PackageNotFoundError:
+    pass
