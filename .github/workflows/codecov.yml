@@ -20,10 +20,8 @@ jobs:
       uses: abatilo/actions-poetry@v2.1.4
       with:
         poetry-version: 1.1.11
-    - name: Install dev-dependencies
-      run: poetry install        
     - name: Install dependencies
-      run: pip install arrow langcodes httpx importlib-metadata
+      run: poetry install        
     - name: Generate Report
       run: |
         pip install coverage pytest arrow
