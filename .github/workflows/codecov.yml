@@ -11,28 +11,28 @@ jobs:
       OS: ${{ matrix.os }}
       PYTHON: ${{ matrix.python-version }}
     steps:
-    - uses: actions/checkout@master
-    - name: Setup Python
-      uses: actions/setup-python@master
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Poetry
-      uses: abatilo/actions-poetry@v2.1.4
-      with:
-        poetry-version: 1.1.11
-    - name: Install dev-dependencies
-      run: poetry install        
-    - name: Install dependencies
-      run: pip install arrow langcodes httpx importlib-metadata
-    - name: Generate Report
-      run: |
-        pip install coverage pytest arrow
-        coverage run -m pytest
-        coverage xml
-    - name: Upload Coverage to Codecov
-      uses: codecov/codecov-action@v2
-      with:
-        env_vars: OS,PYTHON
-        fail_ci_if_error: true
-        flags: unittests
-        verbose: true
+      - uses: actions/checkout@master
+      - name: Setup Python
+        uses: actions/setup-python@master
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v2.1.4
+        with:
+          poetry-version: 1.1.11
+      - name: Install dev-dependencies
+        run: poetry install        
+      - name: Install dependencies
+        run: pip install arrow langcodes httpx importlib-metadata
+      - name: Generate Report
+        run: |
+          pip install coverage pytest arrow
+          coverage run -m pytest
+          coverage xml
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          env_vars: OS,PYTHON
+          fail_ci_if_error: true
+          flags: unittests
+          verbose: true
