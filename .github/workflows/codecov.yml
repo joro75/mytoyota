@@ -20,11 +20,13 @@ jobs:
       uses: abatilo/actions-poetry@v2.1.4
       with:
         poetry-version: 1.1.11
-    - name: Install dependencies
+    - name: Install dev-dependencies
       run: poetry install        
+    - name: Install dependencies
+      run: pip install arrow langcodes httpx importlib-metadata
     - name: Generate Report
       run: |
-        pip install coverage pytest
+        pip install coverage pytest arrow
         coverage run -m pytest
         coverage xml
     - name: Upload Coverage to Codecov
