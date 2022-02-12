@@ -18,7 +18,6 @@ from mytoyota.exceptions import (
 
 # pylint: disable=no-self-use
 
-
 class OfflineController:
     """Provides a Controller class that can be used for testing."""
 
