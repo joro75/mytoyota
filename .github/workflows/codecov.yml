@@ -1,0 +1,30 @@
+name: CodeCov
+on: [pull_request]
+jobs:
+  run:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        python-version: [3.7, 3.8, 3.9, "3.10"]        
+    env:
+      OS: ${{ matrix.os }}
+      PYTHON: ${{ matrix.python-version }}
+    steps:
+    - uses: actions/checkout@master
+    - name: Setup Python
+      uses: actions/setup-python@master
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Generate Report
+      run: |
+        pip install coverage pytest
+        coverage run -m pytest
+        coverage xml
+    - name: Upload Coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        env_vars: OS,PYTHON
+        fail_ci_if_error: true
+        flags: unittests
+        verbose: true
